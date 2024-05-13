@@ -1,0 +1,42 @@
+Adicionando novas perguntas ao Questionário
+
+Este tutorial irá guiá-lo no processo de adicionar novas perguntas ao código do questionário, juntamente com suas respectivas alternativas, incluindo a correta.
+
+Passo 1: Acessando a lista de perguntas
+
+No código, as perguntas são armazenadas em um dicionário chamado self.questions. Cada pergunta é representada por um dicionário com as seguintes chaves:
+"question": Contém o texto da pergunta.
+"options": Uma lista com as alternativas de resposta.
+"correct_option": A alternativa correta para a pergunta.
+
+Passo 2: Adicionando uma nova pergunta
+Para adicionar uma nova pergunta, siga estes passos:
+Crie um novo dicionário representando a pergunta, com as chaves "question", "options" e "correct_option".
+Preencha as chaves com o texto da pergunta, as alternativas de resposta e a alternativa correta.
+Adicione o novo dicionário à lista self.questions.
+Exemplo:
+Vamos adicionar a pergunta "Qual é a capital da França?" ao questionário:
+self.questions.append(
+    {
+        "question": "Qual é a capital da França?",
+        "options": ["Paris", "Londres", "Berlim", "Roma"],
+        "correct_option": "Paris"
+    }
+)
+Use code with caution.
+Python
+Neste exemplo, adicionamos um novo dicionário à lista self.questions contendo a nova pergunta, suas alternativas e a resposta correta.
+
+
+Passo 3: Embaralhando as opções
+O código já embaralha as opções de resposta para cada pergunta usando random.shuffle(question["options"]). Isso garante que a ordem das alternativas seja aleatória a cada execução.
+
+
+Passo 4: Testando a nova pergunta
+Após adicionar a nova pergunta, salve o código e execute o programa. A nova pergunta deverá aparecer aleatoriamente durante o questionário.
+
+
+Dicas:
+Use formatação adequada no texto da pergunta, incluindo quebras de linha (\n) para melhor visualização.
+Certifique-se de que a alternativa correta esteja presente na lista de opções; e que foi inserida em "correct_option".
+Seguindo estes passos, você poderá adicionar quantas perguntas desejar ao seu questionário, tornando-o mais abrangente e desafiador.

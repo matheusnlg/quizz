@@ -1,13 +1,18 @@
 Adicionando novas perguntas ao Questionário
-
 Este tutorial irá guiá-lo no processo de adicionar novas perguntas ao código do questionário, juntamente com suas respectivas alternativas, incluindo a correta.
+Pré-requisitos:
+Antes de começar, certifique-se de ter instalado o Python e as seguintes bibliotecas:
+pip: O gerenciador de pacotes do Python. Instale-o através do site oficial do Python ou usando o gerenciador de pacotes do seu sistema operacional.
+Kivy: A biblioteca gráfica usada neste aplicativo. Para instalá-lo, abra o terminal ou prompt de comando e execute:
+pip install kivy
+
 
 Passo 1: Acessando a lista de perguntas
-
 No código, as perguntas são armazenadas em um dicionário chamado self.questions. Cada pergunta é representada por um dicionário com as seguintes chaves:
 "question": Contém o texto da pergunta.
 "options": Uma lista com as alternativas de resposta.
 "correct_option": A alternativa correta para a pergunta.
+
 
 Passo 2: Adicionando uma nova pergunta
 Para adicionar uma nova pergunta, siga estes passos:

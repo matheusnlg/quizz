@@ -18,7 +18,7 @@ Passo 2: Adicionando uma nova pergunta
 Para adicionar uma nova pergunta, siga estes passos:
 Crie um novo dicionário representando a pergunta, com as chaves "question", "options" e "correct_option".
 Preencha as chaves com o texto da pergunta, as alternativas de resposta e a alternativa correta.
-Adicione o novo dicionário à lista self.questions.
+Adicione o novo dicionário à lista self.questions. (linha 251)
 Exemplo:
 Vamos adicionar a pergunta "Qual é a capital da França?" ao questionário:
 self.questions.append(

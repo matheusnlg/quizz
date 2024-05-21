@@ -5,7 +5,6 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 import random
 
-
 class QuestionnaireApp(App):
     def __init__(self, **kwargs):
         super(QuestionnaireApp, self).__init__(**kwargs)
@@ -14,220 +13,292 @@ class QuestionnaireApp(App):
         self.layout = None
         self.question_label = None
         self.answer_buttons = []
-        self.profiles = {
-            "Rígido": 
-            {
-                "correct_responses": [
-                    "Correto. Mas não se acomode, o próximo desafio será maior.",
-                    "Resposta precisa. Continue se esforçando para manter esse nível.",
-                    "Acertou. Conhecimento é poder, use-o com sabedoria.",
-                    "Exato. Mas não se iluda, a jornada rumo à excelência é longa.",
-                    "Correto. Continue aprimorando suas habilidades, a jornada apenas começou.",
-                    "Resposta impecável. Mas lembre-se, a perfeição exige dedicação constante.",
-                    "Acertou em cheio. No entanto, o verdadeiro teste ainda está por vir.",
-                    "Exato. Continue buscando conhecimento, a ignorância é a inimiga do sucesso.",
-                    "Resposta precisa. A disciplina é a chave para alcançar seus objetivos.",
-                    "Correto. Mas não se distraia, o foco é essencial para o sucesso.",
-                    "Ótimo trabalho! Mas não se esqueça, a arrogância precede a queda.",
-                    "Resposta correta. Continue aprimorando seus métodos, a otimização é crucial.",
-                    "Acertou. A busca pelo conhecimento é um caminho sem fim, nunca pare de aprender.",
-                    "Exato. A perseverança é fundamental para superar os obstáculos.",
-                    "Correto. Mas não se contente com pouco, mire sempre no topo.",
-                    "Resposta impecável. A inteligência é um dom, use-o com responsabilidade.",
-                    "Acertou em cheio. Mas lembre-se, o sucesso é construído passo a passo.",
-                    "Exato. Continue investindo em seu conhecimento, ele é seu maior patrimônio.",
-                    "Resposta precisa. A precisão é essencial para alcançar resultados eficazes.",
-                    "Correto. Mas não se acomode em sua zona de conforto, o crescimento exige desafios.",
-                    "Ótimo trabalho! Mas mantenha os pés no chão, a humildade é essencial.",
-                    "Resposta correta. A análise crítica é fundamental para o aprendizado.",
-                    "Acertou. Continue explorando novas ideias, a inovação é a chave para o progresso.",
-                    "Exato. A persistência é a diferença entre o sucesso e o fracasso.",
-                    "Correto. Mas não se distraia com o sucesso, o foco deve ser mantido."
-                    "Resposta impecável. O conhecimento é a base para a tomada de decisões inteligentes.",
-                    "Acertou em cheio. Mas lembre-se, o aprendizado é um processo contínuo.",
-                    "Exato. Continue se desafiando, a superação é o motor da evolução.",
-                    "Resposta precisa. O domínio do conhecimento requer prática e dedicação.",
-                    "Correto. Mas não se iluda, a jornada rumo ao topo é árdua e exige sacrifícios."
 
+        self.profiles = {
+            "Hard Fun": {
+                "correct_responses": [
+                    "Parabéns! Você dominou o desafio!",
+                    "Excelente, resposta correta! Você está progredindo.",
+                    "Correto! Sua estratégia está funcionando!",
+                    "Incrível! Você superou o obstáculo.",
+                    "Acertou em cheio! A lógica te levou à resposta.",
+                    "Você está no caminho certo! Continue assim.",
+                    "Que conquista! Você está se tornando um mestre.",
+                    "Sensacional! Você provou sua inteligência.",
+                    "Parabéns! Você está aprendendo rápido.",
+                    "Essa foi uma vitória estratégica!",
+                    "Acertou na mosca! Sua análise foi impecável.",
+                    "Continue com essa determinação, você é imbatível!",
+                    "Você está no controle! Continue aprimorando suas habilidades.",
+                    "Essa vitória exige comemoração! Você merece!",
+                    "Que desafio! Mas você superou com maestria.",
+                    "Incrível! Você está se tornando um especialista.",
+                    "Essa resposta mostra sua dedicação ao aprendizado.",
+                    "Você está pensando como um verdadeiro mestre!",
+                    "Acertou! Você está no caminho para o domínio.",
+                    "Essa resposta demonstra sua habilidade e foco.",
+                    "Impressionante! Você está superando cada obstáculo.",
+                    "Sua mente estratégica te guia para a vitória.",
+                    "Você está dominando esse desafio com inteligência!",
+                    "Continue com essa análise crítica, você está imbatível!",
+                    "Sua persistência está te levando ao topo.",
+                    "Essa resposta prova que você está pronto para o próximo nível.",
+                    "Que desafio! Mas você o enfrentou com bravura!",
+                    "Sua inteligência está brilhando!",
+                    "Acertou! Essa foi uma vitória estratégica.",
+                    "Você está dominando esse desafio com ousadia!"
                 ],
+
                 "incorrect_responses": [
-                    "Estude mais, a resposta correta é: {}.",
-                    "A resposta está errada. Dedique-se mais aos estudos, a resposta correta é: {}.",
-                    "Sua resposta demonstra falta de atenção. A resposta correta é: {}.",
-                    "É preciso se esforçar mais para alcançar o sucesso. A resposta correta é: {}.",
-                    "O caminho para o conhecimento exige disciplina e foco. A resposta correta é: {}.",
-                    "A resposta incorreta indica a necessidade de revisão do conteúdo. A resposta correta é: {}.",
-                    "O erro é parte do processo, mas a persistência é fundamental. A resposta correta é: {}.",
-                    "Analise seus erros e busque aprimoramento. A resposta correta é: {}.",
-                    "A resposta incorreta evidencia a importância da atenção aos detalhes. A resposta correta é: {}.",
-                    "O sucesso exige dedicação e esforço contínuos. A resposta correta é: {}.",
-                    "Não desanime com o erro, utilize-o como aprendizado. A resposta correta é: {}.",
-                    "A resposta incorreta aponta para a necessidade de aprimorar seus métodos de estudo. A resposta correta é: {}.",
-                    "A busca pela excelência exige constante aprimoramento. A resposta correta é: {}.",
-                    "O erro é uma oportunidade para identificar suas fraquezas e superá-las. A resposta correta é: {}.",
-                    "A resposta incorreta ressalta a importância da disciplina e da perseverança. A resposta correta é: {}.",
-                    "A jornada rumo ao topo é pavimentada com desafios e superação. A resposta correta é: {}.",
-                    "O conhecimento exige dedicação e investimento constante. A resposta correta é: {}.",
-                    "O erro é um sinal para redobrar seus esforços e buscar aprimoramento. A resposta correta é: {}.",
-                    "A resposta incorreta destaca a necessidade de aprimorar suas habilidades de análise. A resposta correta é: {}.",
-                    "O sucesso é construído com base em esforço, disciplina e aprendizado constante. A resposta correta é: {}.",
-                    "Não se deixe abater pelo erro, utilize-o como motivação para se superar. A resposta correta é: {}.",
-                    "A resposta incorreta indica a necessidade de aprimorar suas estratégias de aprendizagem. A resposta correta é: {}.",
-                    "O domínio do conhecimento exige rigor e precisão. A resposta correta é: {}.",
-                    "A resposta incorreta evidencia a importância de se dedicar à busca pelo conhecimento. A resposta correta é: {}.",
-                    "O caminho para o sucesso é árduo e exige persistência. A resposta correta é: {}.",
-                    "A resposta incorreta serve como um alerta para intensificar seus estudos. A resposta correta é: {}.",
-                    "O aprendizado exige foco e concentração para assimilar o conhecimento. A resposta correta é: {}.",
-                    "A resposta incorreta destaca a importância de se dedicar à busca pela excelência. A resposta correta é: {}.",
-                    "O caminho para o topo exige disciplina, esforço e constante aprimoramento. A resposta correta é: {}.",
-                    "A resposta incorreta demonstra a necessidade de se dedicar com afinco aos estudos. A resposta correta é: {}.",
+                    "Quase! A resposta correta é: {}. Continue tentando.",
+                    "Resposta incorreta. A resposta certa é: {}. Analise melhor as opções.",
+                    "Errado! A resposta correta é: {}. Continue aprimorando suas habilidades.",
+                    "Não desista! Revise sua estratégia e tente novamente.",
+                    "A resposta correta é: {}. Observe atentamente as informações.",
+                    "Essa não foi a resposta, mas continue com a sua persistência!",
+                    "Pense com cuidado e tente novamente! A resposta correta é: {}.",
+                    "Analise as informações com mais atenção, a resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Continue praticando.",
+                    "Reveja sua estratégia e tente novamente! A resposta é: {}.",
+                    "Preste atenção aos detalhes, a resposta correta é: {}.",
+                    "Essa não é a resposta, mas continue com seu foco!",
+                    "Continue observando o jogo e analisando as informações, a resposta correta é: {}.",
+                    "A resposta correta é: {}. Você está no caminho certo, mas precisa de mais prática.",
+                    "Que pena! A resposta certa é: {}. Mas não se preocupe, você vai aprender!",
+                    "Essa não foi a resposta, mas continue aprendendo!",
+                    "Você está perto, mas a resposta correta é: {}.",
+                    "Sua estratégia precisa de um ajuste fino! A resposta é: {}.",
+                    "Continue com a análise, a resposta correta é: {}.",
+                    "Você está no caminho certo, mas a resposta é: {}.",
+                    "Preste atenção aos detalhes! A resposta correta é: {}.",
+                    "Reveja seus conhecimentos! A resposta correta é: {}.",
+                    "Analise o problema com cuidado, a resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Você está aprendendo!",
+                    "Continue praticando! A resposta correta é: {}.",
+                    "Que desafio! Mas você vai superar. A resposta correta é: {}.",
+                    "Revise sua estratégia e tente novamente. A resposta é: {}.",
+                    "Essa não foi a resposta, mas continue com o foco!",
+                    "Continue pensando e analisando o problema. A resposta correta é: {}.",
+                    "A resposta correta é: {}. Não desista!"
                 ]
             },
             
-            "Educado": {
+            "Easy Fun": {
                 "correct_responses": [
-                    "Excelente! Você está indo muito bem!",
-                    "Que maravilha, você acertou!",
-                    "Parabéns pela resposta correta!",
-                    "Isso aí! Você tem um ótimo domínio do assunto.",
-                    "É com grande satisfação que confirmo sua resposta correta!",
-                    "Que bom ver seu progresso, continue assim!",
-                    "Fico feliz em ver que você está aprendendo!",
-                    "É inspirador ver sua dedicação aos estudos!",
-                    "Sua resposta demonstra grande inteligência e conhecimento.",
-                    "Continue com essa energia positiva, você está no caminho certo!",
-                    "Você é um exemplo de aluno dedicado e perspicaz.",
-                    "É admirável ver seu esforço em buscar conhecimento.",
-                    "Sua resposta correta me enche de alegria!",
-                    "Continue trilhando esse caminho de sucesso!",
-                    "É gratificante ver você alcançar seus objetivos.",
-                    "Sua inteligência e dedicação são inspiradoras!",
-                    "Você me faz ter esperança no futuro da educação!",
-                    "Que alegria poder celebrar seu sucesso!",
-                    "É um prazer acompanhar seu desenvolvimento!",
-                    "Parabéns por sua conquista, você merece!",
-                    "Sua resposta demonstra grande capacidade de compreensão.",
-                    "Você tem um futuro brilhante pela frente!",
-                    "É recompensador ver você aplicar seus conhecimentos com maestria.",
-                    "Continue buscando seus sonhos, você é capaz de alcançar grandes coisas!",
-                    "Sua sede por conhecimento é inspiradora!",
-                    "Você é um exemplo a ser seguido!",
-                    "Que satisfação poder contribuir para sua jornada de aprendizado!",
-                    "É um privilégio compartilhar esse momento de sucesso com você!",
-                    "Parabéns por sua inteligência e dedicação!",
-                    "Continue brilhando, o futuro te aguarda de braços abertos!"
-                ],
+                    "Que legal! Você explorou o mundo e encontrou a resposta certa.",
+                    "Excelente, resposta correta! Continue explorando!",
+                    "Correto! Sua curiosidade te levou à resposta.",
+                    "Incrível! Você descobriu um novo segredo.",
+                    "Acertou em cheio! Continue desvendando o mistério.",
+                    "Você está no caminho certo! Continue se aventurando.",
+                    "Que descoberta! Você está se tornando um explorador.",
+                    "Sensacional! Você encontrou a resposta escondida.",
+                    "Parabéns! Você está aprendendo coisas novas a cada passo.",
+                    "Essa foi uma vitória divertida!",
+                    "Acertou na mosca! Sua curiosidade te guiou.",
+                    "Continue com essa alegria de descobrir, você é imbatível!",
+                    "Você está no controle! Continue se divertindo enquanto explora.",
+                    "Essa vitória exige uma celebração! Você merece!",
+                    "Que aventura! Mas você superou com entusiasmo.",
+                    "Incrível! Você está se tornando um mestre explorador.",
+                    "Essa resposta mostra sua paixão por descobrir.",
+                    "Você está pensando como um verdadeiro aventureiro!",
+                    "Acertou! Você está pronto para novas descobertas.",
+                    "Essa resposta demonstra sua curiosidade e entusiasmo.",
+                    "Impressionante! Você está se divertindo enquanto explora.",
+                    "Sua mente curiosa te guia para a aventura.",
+                    "Você está desvendando o mistério com alegria!",
+                    "Continue com essa curiosidade, você é imbatível!",
+                    "Sua aventura está te levando a lugares incríveis.",
+                    "Essa resposta prova que você está pronto para novas missões.",
+                    "Que aventura! Mas você a enfrentou com ousadia!",
+                    "Sua mente curiosa está brilhando!",
+                    "Acertou! Essa foi uma descoberta emocionante.",
+                    "Você está explorando esse mundo com alegria!"
 
+                ],
                 "incorrect_responses": [
-                    "Não foi dessa vez, mas continue tentando! A resposta correta é: {}.",
-                    "Que pena, você errou por pouco. A resposta correta é: {}.",
-                    "Não desanime, errar faz parte do aprendizado. A resposta correta é: {}.",
-                    "Com um pouco mais de atenção, você conseguirá acertar na próxima vez! A resposta correta é: {}.",
-                    "Acredite em seu potencial, você é capaz de aprender e evoluir. A resposta correta é: {}.",
-                    "Continue se esforçando, o sucesso é fruto de dedicação e persistência. A resposta correta é: {}.",
-                    "O importante é não desistir, continue buscando conhecimento. A resposta correta é: {}.",
-                    "Errar é humano, o importante é aprender com os erros. A resposta correta é: {}.",
-                    "Com mais estudo e dedicação, você dominará o assunto. A resposta correta é: {}.",
-                    "Não se preocupe, estamos aqui para te ajudar a aprender e crescer. A resposta correta é: {}.",
-                    "Sua dedicação e esforço são admiráveis, continue se dedicando aos estudos. A resposta correta é: {}.",
-                    "Errar é uma oportunidade para aprender e se fortalecer. A resposta correta é: {}.",
-                    "Acredite em si mesmo, você é capaz de alcançar seus objetivos. A resposta correta é: {}.",
-                    "Com paciência e persistência, você superará os desafios. A resposta correta é: {}.",
-                    "O aprendizado é uma jornada, e errar faz parte do caminho. A resposta correta é: {}.",
-                    "Confie em seu potencial, você pode chegar onde quiser. A resposta correta é: {}.",
-                    "O importante é não desanimar, continue se dedicando aos estudos. A resposta correta é: {}.",
-                    "Errar é uma oportunidade de aprendizado, não tenha medo de tentar novamente. A resposta correta é: {}.",
-                    "Com esforço e dedicação, você dominará qualquer desafio. A resposta correta é: {}.",
-                    "Acredite em si mesmo, você é capaz de realizar grandes coisas. A resposta correta é: {}.",
-                    "Continue buscando conhecimento, a jornada de aprendizado é infinita. A resposta correta é: {}.",
-                    "Errar é humano, o importante é aprender com as experiências. A resposta correta é: {}.",
-                    "Com mais estudo e prática, você alcançará seus objetivos. A resposta correta é: {}.",
-                    "Não se deixe abater pelos erros, use-os como motivação para se superar. A resposta correta é: {}.",
-                    "O importante é continuar aprendendo e se desenvolvendo. A resposta correta é: {}.",
-                    "Com dedicação e persistência, você superará qualquer obstáculo. A resposta correta é: {}.",
-                    "Acredite em seu potencial, você é capaz de alcançar o sucesso. A resposta correta é: {}.",
-                    "Continue se desafiando, o aprendizado é uma jornada constante. A resposta correta é: {}.",
-                    "Errar faz parte do processo de aprendizado, o importante é seguir em frente. A resposta correta é: {}.",
+                    "Não se preocupe, continue explorando! A resposta correta é: {}.",
+                    "Resposta incorreta. A resposta certa é: {}. Continue procurando.",
+                    "Errado! A resposta correta é: {}. Explore mais o mundo do jogo.",
+                    "Não desista! Continue procurando pistas e desvendando o mistério.",
+                    "A resposta correta é: {}. Olhe com mais atenção para as pistas!",
+                    "Essa não foi a resposta, mas continue com sua alegria de descobrir!",
+                    "Pense com cuidado e tente novamente! A resposta correta é: {}.",
+                    "Olhe para o mundo com mais atenção, a resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Continue explorando.",
+                    "Reveja sua estratégia e tente novamente! A resposta é: {}.",
+                    "Preste atenção aos detalhes, a resposta correta é: {}.",
+                    "Essa não é a resposta, mas continue com seu entusiasmo!",
+                    "Continue observando o mundo e analisando as informações, a resposta correta é: {}.",
+                    "A resposta correta é: {}. Você está no caminho certo, mas precisa de mais exploração.",
+                    "Que pena! A resposta certa é: {}. Mas não se preocupe, você vai aprender!",
+                    "Essa não foi a resposta, mas continue aprendendo!",
+                    "Você está perto, mas a resposta correta é: {}.",
+                    "Sua aventura precisa de um ajuste fino! A resposta é: {}.",
+                    "Continue explorando e procurando pistas. A resposta correta é: {}.",
+                    "Você está no caminho certo, mas a resposta é: {}.",
+                    "Preste atenção aos detalhes! A resposta correta é: {}.",
+                    "Reveja seus conhecimentos! A resposta correta é: {}.",
+                    "Analise o mundo com cuidado, a resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Você está aprendendo!",
+                    "Continue explorando! A resposta correta é: {}.",
+                    "Que desafio! Mas você vai superar. A resposta correta é: {}.",
+                    "Reveja sua estratégia e tente novamente. A resposta é: {}.",
+                    "Essa não foi a resposta, mas continue com o foco!",
+                    "Continue pensando e analisando o problema. A resposta correta é: {}.",
+                    "A resposta correta é: {}. Não desista!"
                 ]
             },
-            "Normal": {
+            "Serious Fun": {
                 "correct_responses": [
-                    "Isso aí, acertou!",
-                    "Boa, mandou bem!",
-                    "Acertou em cheio!",
-                    "É isso aí, continue assim!",
-                    "Mandou bem pra caramba!",
-                    "Você é fera, acertou de novo!",
-                    "Que legal, você está afiado!",
-                    "Muito bom, acertou mais uma!",
-                    "Você está craque nesse assunto!",
-                    "Acertou bonito!",
-                    "Parabéns pela resposta correta!",
-                    "Continue nesse ritmo, você está indo bem!",
-                    "Você está mandando ver nesse quiz!",
-                    "É isso aí, você está com tudo!",
-                    "Legal demais, acertou mais uma!",
-                    "Você está arrasando nesse quiz!",
-                    "Mandou muito bem, continue assim!",
-                    "Show de bola, você acertou!",
-                    "Muito bom, você está aprendendo bastante!",
-                    "Acertou, legal!",
-                    "Você está pegando o jeito!",
-                    "Muito bom, continue mandando bem!",
-                    "Acertou, é isso aí!",
-                    "Você está ficando bom nisso!",
-                    "Ótimo, acertou mais uma!",
-                    "Parabéns, você está indo muito bem!",
-                    "Continue com essa energia, você está arrasando!",
-                    "Legal, você acertou!",
-                    "Muito bom, você está dominando o assunto!",
-                    "Acertou, show!"
+                    "Parabéns, você fez a diferença! A resposta correta é: {}.",
+                    "Excelente, resposta correta! Você está impactando o mundo.",
+                    "Correto! Sua ação teve um efeito positivo.",
+                    "Incrível! Você está contribuindo para uma causa importante.",
+                    "Acertou em cheio! Sua escolha fez a diferença.",
+                    "Você está no caminho certo! Continue lutando por seus objetivos.",
+                    "Que impacto! Você está se tornando um agente de mudança.",
+                    "Sensacional! Você encontrou a solução ideal.",
+                    "Parabéns! Você está fazendo a diferença no mundo.",
+                    "Essa foi uma vitória significativa!",
+                    "Acertou na mosca! Sua decisão foi a correta.",
+                    "Continue com essa paixão por transformar, você é imbatível!",
+                    "Você está no controle! Continue buscando soluções inovadoras.",
+                    "Essa vitória exige celebração! Você merece!",
+                    "Que desafio! Mas você superou com determinação.",
+                    "Incrível! Você está se tornando um agente de transformação.",
+                    "Essa resposta mostra sua vontade de mudar o mundo.",
+                    "Você está pensando como um verdadeiro líder!",
+                    "Acertou! Você está pronto para fazer a diferença.",
+                    "Essa resposta demonstra sua responsabilidade social e empatia.",
+                    "Impressionante! Você está criando um impacto positivo.",
+                    "Sua mente crítica e engajada te guia para o sucesso.",
+                    "Você está mudando o mundo com suas decisões!",
+                    "Continue com essa busca por soluções inovadoras, você é imbatível!",
+                    "Sua dedicação está inspirando outros a agir.",
+                    "Essa resposta prova que você está pronto para desafios maiores.",
+                    "Que desafio! Mas você o enfrentou com coragem!",
+                    "Sua mente engajada está brilhando!",
+                    "Acertou! Essa foi uma vitória significativa para a causa.",
+                    "Você está fazendo a diferença com suas escolhas!"
+
                 ],
                 "incorrect_responses": [
-                    "Poxa, você errou! A resposta correta é: {}.",
-                    "Tenta de novo, a resposta certa é: {}.",
-                    "Quase! A resposta correta é: {}.",
-                    "Não desanima, a resposta certa é: {}.",
-                    "Errou feio! A resposta correta é: {}.",
-                    "Na próxima você acerta! A resposta correta é: {}.",
-                    "Putz, errou! A resposta correta é: {}.",
-                    "Que pena, a resposta correta é: {}.",
-                    "Não foi dessa vez! A resposta correta é: {}.",
-                    "Errar é normal, a resposta correta é: {}.",
-                    "Tenta de novo, quem sabe você acerta! A resposta correta é: {}.",
-                    "Não desiste, a resposta certa é: {}.",
-                    "Mais sorte na próxima! A resposta correta é: {}.",
-                    "Uma pena, a resposta correta é: {}.",
-                    "Valeu a tentativa! A resposta correta é: {}.",
-                    "Quase lá! A resposta correta é: {}.",
-                    "Continue tentando, a resposta certa é: {}.",
-                    "Errou dessa vez! A resposta correta é: {}.",
-                    "Na próxima você pega! A resposta correta é: {}.",
-                    "Não foi dessa vez, mas não desanima! A resposta correta é: {}.",
-                    "Tente outra vez, a resposta certa é: {}.",
-                    "Continue praticando, a resposta correta é: {}.",
-                    "Quase acertou! A resposta correta é: {}.",
-                    "Errou por pouco! A resposta correta é: {}.",
-                    "Mais sorte na próxima tentativa! A resposta correta é: {}.",
-                    "Não desanime, a resposta correta é: {}.",
-                    "Tenta de novo, você consegue! A resposta correta é: {}.",
-                    "Continue se esforçando, a resposta correta é: {}.",
-                    "Valeu a tentativa, a resposta correta é: {}.",
-                    "Errou feio, mas não desanima! A resposta correta é: {}.",
+                    "Não desanime, continue lutando por seus objetivos! A resposta correta é: {}.",
+                    "Resposta incorreta. A resposta certa é: {}. Continue buscando soluções.",
+                    "Errado! A resposta correta é: {}. Você pode fazer a diferença!",
+                    "Não desista! Continue buscando soluções para problemas do mundo.",
+                    "A resposta correta é: {}. Observe atentamente os desafios.",
+                    "Essa não foi a resposta, mas continue com sua paixão por transformar!",
+                    "Pense com cuidado e tente novamente! A resposta correta é: {}.",
+                    "Olhe para o mundo com mais atenção, a resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Continue buscando soluções.",
+                    "Reveja sua estratégia e tente novamente! A resposta é: {}.",
+                    "Preste atenção aos detalhes, a resposta correta é: {}.",
+                    "Essa não é a resposta, mas continue com seu entusiasmo por mudar o mundo!",
+                    "Continue observando o mundo e analisando os problemas, a resposta correta é: {}.",
+                    "A resposta correta é: {}. Você está no caminho certo, mas precisa de mais ação.",
+                    "Que pena! A resposta certa é: {}. Mas não se preocupe, você vai aprender!",
+                    "Essa não foi a resposta, mas continue aprendendo!",
+                    "Você está perto, mas a resposta correta é: {}.",
+                    "Sua missão precisa de um ajuste fino! A resposta é: {}.",
+                    "Continue explorando e procurando soluções. A resposta correta é: {}.",
+                    "Você está no caminho certo, mas a resposta é: {}.",
+                    "Preste atenção aos detalhes! A resposta correta é: {}.",
+                    "Reveja seus conhecimentos! A resposta correta é: {}.",
+                    "Analise o problema com cuidado, a resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Você está aprendendo!",
+                    "Continue buscando soluções! A resposta correta é: {}.",
+                    "Que desafio! Mas você vai superar. A resposta correta é: {}.",
+                    "Reveja sua estratégia e tente novamente. A resposta é: {}.",
+                    "Essa não foi a resposta, mas continue com o foco!",
+                    "Continue pensando e analisando o problema. A resposta correta é: {}.",
+                    "A resposta correta é: {}. Não desista!"
+                ]
+            },
+            "People Fun": {
+                "correct_responses": [
+                    "Parabéns, você trabalhou em equipe e venceu! A resposta correta é: {}.",
+                    "Excelente, resposta correta! O trabalho em equipe é fundamental.",
+                    "Correto! Sua colaboração foi essencial para o sucesso.",
+                    "Incrível! Vocês trabalharam juntos e conquistaram a vitória.",
+                    "Acertou em cheio! A união de vocês fez a diferença.",
+                    "Vocês estão no caminho certo! Continue trabalhando juntos.",
+                    "Que conquista! Vocês são uma equipe imbatível.",
+                    "Sensacional! Vocês se ajudaram e alcançaram o objetivo.",
+                    "Parabéns! Vocês estão aprendendo a trabalhar em equipe.",
+                    "Essa foi uma vitória em equipe!",
+                    "Acertou na mosca! Vocês se comunicaram e se ajudaram.",
+                    "Continue com essa união, vocês são imbatíveis!",
+                    "Vocês estão no controle! Continue aprimorando o trabalho em equipe.",
+                    "Essa vitória exige uma festa! Vocês merecem!",
+                    "Que desafio! Mas vocês superaram com união.",
+                    "Incrível! Vocês estão se tornando uma equipe de sucesso.",
+                    "Essa resposta mostra o poder da colaboração.",
+                    "Vocês estão pensando como uma equipe verdadeiramente unida!",
+                    "Acertou! Vocês estão prontos para novos desafios em equipe.",
+                    "Essa resposta demonstra a força do trabalho em conjunto.",
+                    "Impressionante! Vocês estão construindo uma equipe forte.",
+                    "Sua comunicação e união os guiaram para a vitória.",
+                    "Vocês estão trabalhando juntos e conquistando o impossível!",
+                    "Continue com essa união, vocês são imbatíveis!",
+                    "Sua dedicação em equipe está inspirando outros.",
+                    "Essa resposta prova que vocês são uma equipe de alta performance.",
+                    "Que desafio! Mas vocês o enfrentaram com união!",
+                    "O trabalho em equipe de vocês está brilhando!",
+                    "Acertou! Essa foi uma vitória para toda a equipe.",
+                    "Vocês estão construindo um legado de sucesso em equipe!"
+                ],
+                "incorrect_responses": [
+                    "Que pena! A resposta correta é: {}. Continue trabalhando em equipe!",
+                    "Resposta incorreta. A resposta certa é: {}. A união faz a força.",
+                    "Errado! A resposta correta é: {}. A comunicação é essencial para o sucesso.",
+                    "Não desanime! Continue buscando soluções em equipe.",
+                    "A resposta correta é: {}. Lembrem-se da importância da colaboração.",
+                    "Essa não foi a resposta, mas continuem unidos e focados!",
+                    "Pensem com cuidado e tentem novamente! A resposta correta é: {}.",
+                    "Lembrem-se de que juntos vocês são mais fortes! A resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Trabalhem em equipe!",
+                    "Revisem sua estratégia e tentem novamente! A resposta é: {}.",
+                    "Prestem atenção aos detalhes e se comuniquem! A resposta correta é: {}.",
+                    "Essa não é a resposta, mas continuem unidos!",
+                    "Lembrem-se que a comunicação é a chave! A resposta correta é: {}.",
+                    "A resposta correta é: {}. Vocês estão no caminho certo, mas precisam se comunicar melhor.",
+                    "Que pena! A resposta certa é: {}. Mas não se preocupe, vocês vão aprender!",
+                    "Essa não foi a resposta, mas continuem aprendendo juntos!",
+                    "Vocês estão perto, mas a resposta correta é: {}.",
+                    "Lembrem-se de que a união faz a força! A resposta é: {}.",
+                    "Continuem explorando e procurando soluções em equipe. A resposta correta é: {}.",
+                    "Vocês estão no caminho certo, mas a resposta é: {}.",
+                    "Prestem atenção aos detalhes e se comuniquem! A resposta correta é: {}.",
+                    "Lembrem-se de seus objetivos! A resposta correta é: {}.",
+                    "Analisem o problema juntos! A resposta correta é: {}.",
+                    "Não desanime! A resposta correta é: {}. Vocês estão aprendendo!",
+                    "Continuem buscando soluções em equipe! A resposta correta é: {}.",
+                    "Que desafio! Mas vocês vão superar juntos. A resposta correta é: {}.",
+                    "Revisem sua estratégia e tentem novamente. A resposta é: {}.",
+                    "Essa não foi a resposta, mas continuem unidos!",
+                    "Continuem pensando e analisando o problema juntos. A resposta correta é: {}.",
+                    "A resposta correta é: {}. Não desista!"
                 ]
             }
         }
 
     def build(self):
         self.profile_selection_layout = BoxLayout(orientation="vertical", spacing=30, padding=(50, 50))
-        self.profile_label = Label(text="Selecione seu perfil:", size_hint=(1, 0.2), halign="center", font_size="24sp")
-        self.rigid_button = Button(text="Rígido", on_press=lambda instance: self.start_quiz("Rígido"))
-        self.polite_button = Button(text="Educado", on_press=lambda instance: self.start_quiz("Educado"))
-        self.normal_button = Button(text="Normal", on_press=lambda instance: self.start_quiz("Normal"))
+        self.profile_label = Label(text="Selecione seu tipo de jogador:", size_hint=(1, 0.2), halign="center", font_size="24sp")
+        self.hard_fun_button = Button(text="Hard Fun", on_press=lambda instance: self.start_quiz("Hard Fun"))
+        self.easy_fun_button = Button(text="Easy Fun", on_press=lambda instance: self.start_quiz("Easy Fun"))
+        self.serious_fun_button = Button(text="Serious Fun", on_press=lambda instance: self.start_quiz("Serious Fun"))
+        self.people_fun_button = Button(text="People Fun", on_press=lambda instance: self.start_quiz("People Fun"))
+
         self.profile_selection_layout.add_widget(self.profile_label)
-        self.profile_selection_layout.add_widget(self.rigid_button)
-        self.profile_selection_layout.add_widget(self.polite_button)
-        self.profile_selection_layout.add_widget(self.normal_button)
+        self.profile_selection_layout.add_widget(self.hard_fun_button)
+        self.profile_selection_layout.add_widget(self.easy_fun_button)
+        self.profile_selection_layout.add_widget(self.serious_fun_button)
+        self.profile_selection_layout.add_widget(self.people_fun_button)
+
         return self.profile_selection_layout
 
     def start_quiz(self, profile):
@@ -241,13 +312,14 @@ class QuestionnaireApp(App):
             button.bind(on_press=self.check_answer)
             self.answer_buttons.append(button)
             self.layout.add_widget(button)
-        
-        # Atualiza o root para o novo layout
-        self.root.clear_widgets() 
-        self.root.add_widget(self.layout) 
 
+        # Adicione a BoxLayout do quiz à tela principal
+        self.profile_selection_layout.add_widget(self.layout)
+
+        self.root = self.layout
         self.current_question_index = 0
         self.correct_answers = 0
+
         self.questions = [
             {
                 "question": "Qual é a capital do Brasil?",
@@ -400,9 +472,11 @@ class QuestionnaireApp(App):
                 "correct_option": "366"
             }
         ]
+
         # Shuffle options for each question
         for question in self.questions:
             random.shuffle(question["options"])
+
         self.show_question()
 
     def show_question(self):
@@ -413,24 +487,26 @@ class QuestionnaireApp(App):
                 self.answer_buttons[i].text = option
         else:
             self.layout.clear_widgets()
-            self.layout.add_widget(Label(text=f"Parabéns, você acertou {self.correct_answers} de {len(self.questions)} perguntas!", halign="center", valign="middle", font_size="24sp"))
+            self.profile_selection_layout.add_widget(Label(text=f"Parabéns, você acertou {self.correct_answers} de {len(self.questions)} perguntas!", halign="center", valign="middle", font_size="24sp"))
 
     def check_answer(self, instance):
         selected_option_index = self.answer_buttons.index(instance)
         question_data = self.questions[self.current_question_index]
         correct_option = question_data["correct_option"]
         selected_option_text = question_data["options"][selected_option_index]
+
         if selected_option_text == correct_option:
             self.correct_answers += 1
-            content = Label(text=random.choice(self.profiles[self.profile]["correct_responses"]), halign="center", valign="middle")
+            content = Label(text=random.choice(self.profiles[self.profile]["correct_responses"]).format(correct_option), halign="center", valign="middle")
         else:
             content = Label(text=random.choice(self.profiles[self.profile]["incorrect_responses"]).format(correct_option), halign="center", valign="middle")
+
         popup = Popup(title="Resposta", content=content, title_align="center", size_hint=(None, None), size=(600, 500))
         content.bind(size=content.setter('text_size'))
         popup.open()
+
         self.current_question_index += 1
         self.show_question()
-
 
 if __name__ == "__main__":
     QuestionnaireApp().run()
